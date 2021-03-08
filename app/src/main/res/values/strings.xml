@@ -1,0 +1,327 @@
+<resources>
+    <string name="app_name">ProCycling Info</string>
+
+    <!-- Bottom navigation bar-->
+    <string name="bottom_nav_members">Members</string>
+    <string name="bottom_nav_teams">Teams</string>
+    <string name="bottom_nav_about">About</string>
+
+    <!-- Item's image descriptions -->
+    <string name="flag">flag</string>
+
+    <!-- Activity main strings-->
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="clear">Clear</string>
+    <string name="fab_filter">fab-filter</string>
+    <string name="function">Function</string>
+    <string name="all">All</string>
+    <string name="country">Country</string>
+
+    <!-- Fragment members-view-pager strings-->
+    <string name="no_available_members">No available members.</string>
+    <string name="no_internet">You\'re offline. Check your connection.</string>
+    <string name="retry">Retry</string>
+
+    <!-- Fragment teams-view-pager strings-->
+    <string name="no_available_teams">No available teams.</string>
+
+    <!-- Fragment about -->
+    <string name="creator">Creator: Andrei Rozov</string>
+    <string name="site">Site: www.andreirozov.codes</string>
+    <string name="contact">Contact: andrei.rozov98@gmail.com</string>
+
+    <!-- Available functions -->
+    <string-array name="members_function_array">
+        <item>All</item>
+        <item>Ass. General Manager</item>
+        <item>Ass. Sports Director</item>
+        <item>Ass. Team Manager</item>
+        <item>General Manager</item>
+        <item>Representative of the team</item>
+        <item>Rider</item>
+        <item>Sports Director</item>
+        <item>Team Manager</item>
+    </string-array>
+
+    <!-- Available genders -->
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="both">Both</string>
+
+    <!-- Available countries -->
+    <string-array name="country_array">
+        <item>All</item>
+        <item>Albania</item>
+        <item>Algeria</item>
+        <item>Andorra</item>
+        <item>Angola</item>
+        <item>Argentina</item>
+        <item>Armenia</item>
+        <item>Australia</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Bahamas</item>
+        <item>Barbados</item>
+        <item>Belgium</item>
+        <item>Bermuda</item>
+        <item>Bosnia And Herzegovina</item>
+        <item>Belarus</item>
+        <item>Bolivia</item>
+        <item>Botswana</item>
+        <item>Brazil</item>
+        <item>Bahrain</item>
+        <item>Brunei</item>
+        <item>Bulgaria</item>
+        <item>Cambodia</item>
+        <item>Canada</item>
+        <item>Chile</item>
+        <item>China</item>
+        <item>Cote D\'Ivoire</item>
+        <item>Democratic Republic of the Congo</item>
+        <item>Colombia</item>
+        <item>Costa Rica</item>
+        <item>Croatia</item>
+        <item>Cuba</item>
+        <item>Curacao</item>
+        <item>Cyprus</item>
+        <item>Czech Republic</item>
+        <item>Denmark</item>
+        <item>Dominican Republic</item>
+        <item>Ecuador</item>
+        <item>Egypt</item>
+        <item>Eritrea</item>
+        <item>El Salvador</item>
+        <item>Spain</item>
+        <item>Estonia</item>
+        <item>Ethiopia</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>FRG</item>
+        <item>Great Britain</item>
+        <item>Guinea-Bissau</item>
+        <item>GDR</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Guatemala</item>
+        <item>Guam</item>
+        <item>Guyana</item>
+        <item>Hong Kong</item>
+        <item>Honduras</item>
+        <item>Hungary</item>
+        <item>Indonesia</item>
+        <item>India</item>
+        <item>Iran</item>
+        <item>Ireland</item>
+        <item>Iraq</item>
+        <item>Israel</item>
+        <item>Italy</item>
+        <item>Jamaica</item>
+        <item>Jordan</item>
+        <item>Japan</item>
+        <item>Kazakhstan</item>
+        <item>Kenya</item>
+        <item>Kyrgyzstan</item>
+        <item>South Korea</item>
+        <item>Kuwait</item>
+        <item>Laos</item>
+        <item>Latvia</item>
+        <item>Lesotho</item>
+        <item>Libya</item>
+        <item>Liechtenstein</item>
+        <item>Lithuania</item>
+        <item>Luxembourg</item>
+        <item>Morocco</item>
+        <item>Malaysia</item>
+        <item>Moldova</item>
+        <item>Mexico</item>
+        <item>Mongolia</item>
+        <item>Macedonia</item>
+        <item>Malta</item>
+        <item>Montenegro</item>
+        <item>Monaco</item>
+        <item>Mauritius</item>
+        <item>Namibia</item>
+        <item>Netherlands</item>
+        <item>Norway</item>
+        <item>New Zealand</item>
+        <item>Panama</item>
+        <item>Paraguay</item>
+        <item>Peru</item>
+        <item>Philippines</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Puerto Rico</item>
+        <item>Qatar</item>
+        <item>Romania</item>
+        <item>South Africa</item>
+        <item>Russia</item>
+        <item>Rwanda</item>
+        <item>Singapore</item>
+        <item>Saint Kitts And Nevis</item>
+        <item>Slovenia</item>
+        <item>San Marino</item>
+        <item>Serbia</item>
+        <item>Switzerland</item>
+        <item>Slovakia</item>
+        <item>Sweden</item>
+        <item>Swaziland</item>
+        <item>Syria</item>
+        <item>Tanzania</item>
+        <item>Thailand</item>
+        <item>Turkmenistan</item>
+        <item>Togo</item>
+        <item>Taipei</item>
+        <item>Trinidad And Tobago</item>
+        <item>Tunisia</item>
+        <item>Turkey</item>
+        <item>UAE</item>
+        <item>Uganda</item>
+        <item>Ukraine</item>
+        <item>Uruguay</item>
+        <item>USA</item>
+        <item>Uzbekistan</item>
+        <item>Venezuela</item>
+        <item>Vietnam</item>
+        <item>Zambia</item>
+        <item>Zimbabwe</item>
+    </string-array>
+
+    <string-array name="country_code_array">
+        <item>All</item>
+        <item>ALB</item>
+        <item>ALG</item>
+        <item>AND</item>
+        <item>ANG</item>
+        <item>ARG</item>
+        <item>ARM</item>
+        <item>AUS</item>
+        <item>AUT</item>
+        <item>AZE</item>
+        <item>BAH</item>
+        <item>BAR</item>
+        <item>BEL</item>
+        <item>BER</item>
+        <item>BIH</item>
+        <item>BLR</item>
+        <item>BOL</item>
+        <item>BOT</item>
+        <item>BRA</item>
+        <item>BRN</item>
+        <item>BRU</item>
+        <item>BUL</item>
+        <item>CAM</item>
+        <item>CAN</item>
+        <item>CHI</item>
+        <item>CHN</item>
+        <item>CIV</item>
+        <item>COD</item>
+        <item>COL</item>
+        <item>CRC</item>
+        <item>CRO</item>
+        <item>CUB</item>
+        <item>CUR</item>
+        <item>CYP</item>
+        <item>CZE</item>
+        <item>DEN</item>
+        <item>DOM</item>
+        <item>ECU</item>
+        <item>EGY</item>
+        <item>ERI</item>
+        <item>ESA</item>
+        <item>ESP</item>
+        <item>EST</item>
+        <item>ETH</item>
+        <item>FIN</item>
+        <item>FRA</item>
+        <item>FRG</item>
+        <item>GBR</item>
+        <item>GBS</item>
+        <item>GDR</item>
+        <item>GER</item>
+        <item>GRE</item>
+        <item>GUA</item>
+        <item>GUM</item>
+        <item>GUY</item>
+        <item>HKG</item>
+        <item>HON</item>
+        <item>HUN</item>
+        <item>INA</item>
+        <item>IND</item>
+        <item>IRI</item>
+        <item>IRL</item>
+        <item>IRQ</item>
+        <item>ISR</item>
+        <item>ITA</item>
+        <item>JAM</item>
+        <item>JOR</item>
+        <item>JPN</item>
+        <item>KAZ</item>
+        <item>KEN</item>
+        <item>KGZ</item>
+        <item>KOR</item>
+        <item>KUW</item>
+        <item>LAO</item>
+        <item>LAT</item>
+        <item>LES</item>
+        <item>LBA</item>
+        <item>LIE</item>
+        <item>LTU</item>
+        <item>LUX</item>
+        <item>MAR</item>
+        <item>MAS</item>
+        <item>MDA</item>
+        <item>MEX</item>
+        <item>MGL</item>
+        <item>MKD</item>
+        <item>MLT</item>
+        <item>MNE</item>
+        <item>MON</item>
+        <item>MRI</item>
+        <item>NAM</item>
+        <item>NED</item>
+        <item>NOR</item>
+        <item>NZL</item>
+        <item>PAN</item>
+        <item>PAR</item>
+        <item>PER</item>
+        <item>PHI</item>
+        <item>POL</item>
+        <item>POR</item>
+        <item>PUR</item>
+        <item>QAT</item>
+        <item>ROU</item>
+        <item>RSA</item>
+        <item>RUS</item>
+        <item>RWA</item>
+        <item>SIN</item>
+        <item>SKN</item>
+        <item>SLO</item>
+        <item>SMR</item>
+        <item>SRB</item>
+        <item>SUI</item>
+        <item>SVK</item>
+        <item>SWE</item>
+        <item>SWZ</item>
+        <item>SYR</item>
+        <item>TAN</item>
+        <item>THA</item>
+        <item>TKM</item>
+        <item>TOG</item>
+        <item>TPE</item>
+        <item>TTO</item>
+        <item>TUN</item>
+        <item>TUR</item>
+        <item>UAE</item>
+        <item>UGA</item>
+        <item>UKR</item>
+        <item>URU</item>
+        <item>USA</item>
+        <item>UZB</item>
+        <item>VEN</item>
+        <item>VIE</item>
+        <item>ZAM</item>
+        <item>ZIM</item>
+    </string-array>
+
+</resources>

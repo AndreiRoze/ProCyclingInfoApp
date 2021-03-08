@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TRANSITIONS FOR MEMBERS -->
+
+    <Transition
+        app:constraintSetEnd="@+id/endMembers"
+        app:constraintSetStart="@+id/start"
+        app:duration="300"
+        app:motionInterpolator="linear">
+
+        <OnClick
+            app:clickAction="transitionToStart"
+            app:targetId="@+id/cancelFilterMembersButtonActivityMain" />
+
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/endMembers"
+        app:constraintSetStart="@+id/start"
+        app:duration="300"
+        app:motionInterpolator="linear">
+
+        <OnClick
+            app:clickAction="transitionToStart"
+            app:targetId="@+id/touchLayoutActivityMain" />
+
+    </Transition>
+
+    <!-- TRANSITIONS FOR TEAMS -->
+
+    <Transition
+        app:constraintSetEnd="@+id/endTeams"
+        app:constraintSetStart="@+id/start"
+        app:duration="300"
+        app:motionInterpolator="linear">
+
+        <OnClick
+            app:clickAction="transitionToStart"
+            app:targetId="@+id/cancelFilterTeamsButtonActivityMain" />
+
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@+id/endTeams"
+        app:constraintSetStart="@+id/start"
+        app:duration="300"
+        app:motionInterpolator="linear">
+
+        <OnClick
+            app:clickAction="transitionToStart"
+            app:targetId="@+id/touchLayoutActivityMain" />
+
+    </Transition>
+
+    <!-- START POSITION-->
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/filterFabActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="72dp"
+            android:contentDescription="@string/fab_filter"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/verticalGuidelineActivityMain"
+            app:visibilityMode="ignore" />
+
+    </ConstraintSet>
+
+    <!-- MEMBERS -->
+    <ConstraintSet android:id="@+id/endMembers">
+
+        <Constraint
+            android:id="@+id/verticalGuidelineActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="1.0" />
+
+        <Constraint
+            android:id="@+id/horizontalMembersGuidelineActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <Constraint
+            android:id="@+id/filterFabActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="72dp"
+            android:contentDescription="@string/fab_filter"
+            android:rotation="360"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/verticalGuidelineActivityMain"
+            app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@+id/touchLayoutActivityMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+
+    <!-- TEAMS -->
+    <ConstraintSet android:id="@+id/endTeams">
+
+        <Constraint
+            android:id="@+id/verticalGuidelineActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="1.0" />
+
+        <Constraint
+            android:id="@+id/horizontalTeamsGuidelineActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.62" />
+
+        <Constraint
+            android:id="@+id/filterFabActivityMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginBottom="72dp"
+            android:contentDescription="@string/fab_filter"
+            android:rotation="360"
+            android:src="@drawable/ic_filter"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/verticalGuidelineActivityMain"
+            app:visibilityMode="ignore" />
+
+        <Constraint
+            android:id="@+id/touchLayoutActivityMain"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </ConstraintSet>
+
+</MotionScene>
