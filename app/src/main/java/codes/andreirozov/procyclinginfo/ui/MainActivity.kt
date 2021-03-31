@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity() {
                 // Show filter-card for teams
                 R.id.teamsFragment -> binding.motionLayoutActivityMain.transitionToState(R.id.endTeams)
             }
-
         }
 
         // Catch touch on members filter-card
@@ -57,63 +56,84 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Apply filter for members
-        binding.applyFilterMembersButtonActivityMain.setOnClickListener {
+        binding.contentFilterMembersCardActivityMain.applyFilterMembersButtonActivityMain.setOnClickListener {
 
             // Get strings of team categories from ChipGroup
-            val chips = binding.teamCategoryFilterMembersChipGroupActivityMain.checkedChipIds
+            val chips =
+                binding.contentFilterMembersCardActivityMain.teamCategoryFilterMembersChipGroupActivityMain.checkedChipIds
             val teamCategories = mutableListOf<String>()
             for (chip in chips) {
                 teamCategories.add(findViewById<Chip>(chip).text.toString())
             }
 
-            val gender = findViewById<RadioButton>(binding.genderFilterMembersRadioGroupActivityMain.checkedRadioButtonId).text.toString()
-            val function = binding.functionFilterMembersAutoCompleteTextViewActivityMain.text.toString()
-            val country = binding.countryFilterMembersAutoCompleteTextViewActivityMain.text.toString()
+            val gender =
+                findViewById<RadioButton>(binding.contentFilterMembersCardActivityMain.genderFilterMembersRadioGroupActivityMain.checkedRadioButtonId).text.toString()
+            val function =
+                binding.contentFilterMembersCardActivityMain.functionFilterMembersAutoCompleteTextViewActivityMain.text.toString()
+            val country =
+                binding.contentFilterMembersCardActivityMain.countryFilterMembersAutoCompleteTextViewActivityMain.text.toString()
 
             Log.e("Filter data", "$teamCategories $gender $function $country")
 
             //set filter for members
-            (fragmentManager.findFragmentByTag("Members") as MembersFragment).setFilterMembers(teamCategories, gender, function, country)
+            (fragmentManager.findFragmentByTag("Members") as MembersFragment).setFilterMembers(
+                teamCategories,
+                gender,
+                function,
+                country
+            )
 
             binding.motionLayoutActivityMain.transitionToStart()
         }
 
         // Apply filter for teams
-        binding.applyFilterTeamsButtonActivityMain.setOnClickListener {
+        binding.contentFilterTeamsCardActivityMain.applyFilterTeamsButtonActivityMain.setOnClickListener {
 
             // Get strings of team categories from ChipGroup
-            val chips = binding.teamCategoryFilterTeamsChipGroupActivityMain.checkedChipIds
+            val chips =
+                binding.contentFilterTeamsCardActivityMain.teamCategoryFilterTeamsChipGroupActivityMain.checkedChipIds
             val teamCategories = mutableListOf<String>()
             for (chip in chips) {
                 teamCategories.add(findViewById<Chip>(chip).text.toString())
             }
 
-            val country = binding.countryFilterTeamsAutoCompleteTextViewActivityMain.text.toString()
+            val country =
+                binding.contentFilterTeamsCardActivityMain.countryFilterTeamsAutoCompleteTextViewActivityMain.text.toString()
 
             Log.e("Filter data", "$teamCategories $country")
 
             //set filter for teams
-            (fragmentManager.findFragmentByTag("Teams") as TeamsFragment).setFilterTeams(teamCategories, country)
+            (fragmentManager.findFragmentByTag("Teams") as TeamsFragment).setFilterTeams(
+                teamCategories,
+                country
+            )
 
             binding.motionLayoutActivityMain.transitionToStart()
         }
 
         // Clear filter members
-        binding.clearFilterMembersButtonActivityMain.setOnClickListener {
+        binding.contentFilterMembersCardActivityMain.clearFilterMembersButtonActivityMain.setOnClickListener {
 
             clearMembersFilter()
 
-            (fragmentManager.findFragmentByTag("Members") as MembersFragment).setFilterMembers(mutableListOf(), "Both", "All", "All")
+            (fragmentManager.findFragmentByTag("Members") as MembersFragment).setFilterMembers(
+                mutableListOf(),
+                "Both",
+                "All",
+                "All"
+            )
         }
 
         // Clear filter teams
-        binding.clearFilterTeamsButtonActivityMain.setOnClickListener {
+        binding.contentFilterTeamsCardActivityMain.clearFilterTeamsButtonActivityMain.setOnClickListener {
 
             clearTeamsFilter()
 
-            (fragmentManager.findFragmentByTag("Teams") as TeamsFragment).setFilterTeams(mutableListOf(), "All")
+            (fragmentManager.findFragmentByTag("Teams") as TeamsFragment).setFilterTeams(
+                mutableListOf(),
+                "All"
+            )
         }
-
     }
 
     private fun setUI() {
@@ -121,34 +141,32 @@ class MainActivity : AppCompatActivity() {
         setBottomNavigation()
 
         // Set members card
-
         setTeamCategoryMembersChipGroup()
-
         setFunctionMembersSpinner()
-
         setCountryMembersSpinner()
 
         // Set teams card
-
         setTeamCategoryTeamsChipGroup()
-
         setCountryTeamsSpinner()
-
     }
-
 
     private fun setBottomNavigation() {
 
         fragmentManager.beginTransaction().apply {
             add(R.id.fragmentContainer, membersFragment, getString(R.string.bottom_nav_members))
-            add(R.id.fragmentContainer, teamsFragment, getString(R.string.bottom_nav_teams)).hide(teamsFragment)
-            add(R.id.fragmentContainer, aboutFragment, getString(R.string.bottom_nav_about)).hide(aboutFragment)
+            add(R.id.fragmentContainer, teamsFragment, getString(R.string.bottom_nav_teams)).hide(
+                teamsFragment
+            )
+            add(R.id.fragmentContainer, aboutFragment, getString(R.string.bottom_nav_about)).hide(
+                aboutFragment
+            )
         }.commit()
 
         binding.bottomNavigation.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.membersFragment -> {
-                    fragmentManager.beginTransaction().hide(activeFragment).show(membersFragment).commit()
+                    fragmentManager.beginTransaction().hide(activeFragment).show(membersFragment)
+                        .commit()
                     activeFragment = membersFragment
 
                     // Show fab when select membersFragment
@@ -157,7 +175,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.teamsFragment -> {
-                    fragmentManager.beginTransaction().hide(activeFragment).show(teamsFragment).commit()
+                    fragmentManager.beginTransaction().hide(activeFragment).show(teamsFragment)
+                        .commit()
                     activeFragment = teamsFragment
 
                     // Show fab when select teamsFragment
@@ -166,7 +185,8 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.aboutFragment -> {
-                    fragmentManager.beginTransaction().hide(activeFragment).show(aboutFragment).commit()
+                    fragmentManager.beginTransaction().hide(activeFragment).show(aboutFragment)
+                        .commit()
                     activeFragment = aboutFragment
 
                     // Hide fab when select aboutFragment
@@ -177,78 +197,105 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
     }
 
     private fun setTeamCategoryMembersChipGroup() {
 
-        val list = listOf("CRO", "CTM", "CTW", "E-MTB", "MTB", "P-CRO", "PCT", "PRO", "PRT", "WTT", "WTW")
+        val list =
+            listOf("CRO", "CTM", "CTW", "E-MTB", "MTB", "P-CRO", "PCT", "PRO", "PRT", "WTT", "WTW")
 
         for (i in list) {
             val chip = Chip(this, null, R.attr.customChipChoiceStyle)
             chip.text = i
-            binding.teamCategoryFilterMembersChipGroupActivityMain.addView(chip)
+            binding.contentFilterMembersCardActivityMain.teamCategoryFilterMembersChipGroupActivityMain.addView(
+                chip
+            )
         }
-
     }
 
     private fun setFunctionMembersSpinner() {
 
-        val functionSpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.members_function_array, android.R.layout.simple_spinner_dropdown_item)
-        (binding.functionFilterMembersTextInputLayoutActivityMain.editText as? AutoCompleteTextView)?.setAdapter(functionSpinnerAdapter)
-
+        val functionSpinnerAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.members_function_array,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        (binding.contentFilterMembersCardActivityMain.functionFilterMembersTextInputLayoutActivityMain.editText as? AutoCompleteTextView)?.setAdapter(
+            functionSpinnerAdapter
+        )
     }
 
     private fun setCountryMembersSpinner() {
 
-        val countrySpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.country_array, android.R.layout.simple_spinner_dropdown_item)
-        (binding.countryFilterMembersTextInputLayoutActivityMain.editText as? AutoCompleteTextView)?.setAdapter(countrySpinnerAdapter)
-
+        val countrySpinnerAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.country_array,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        (binding.contentFilterMembersCardActivityMain.countryFilterMembersTextInputLayoutActivityMain.editText as? AutoCompleteTextView)?.setAdapter(
+            countrySpinnerAdapter
+        )
     }
 
     private fun setTeamCategoryTeamsChipGroup() {
 
-        val list = listOf("CRO", "CTM", "CTW", "E-MTB", "MTB", "P-CRO", "PCT", "PRO", "PRT", "WTT", "WTW")
+        val list =
+            listOf("CRO", "CTM", "CTW", "E-MTB", "MTB", "P-CRO", "PCT", "PRO", "PRT", "WTT", "WTW")
 
         for (i in list) {
             val chip = Chip(this, null, R.attr.customChipChoiceStyle)
             chip.text = i
-            binding.teamCategoryFilterTeamsChipGroupActivityMain.addView(chip)
+            binding.contentFilterTeamsCardActivityMain.teamCategoryFilterTeamsChipGroupActivityMain.addView(
+                chip
+            )
         }
-
     }
 
     private fun setCountryTeamsSpinner() {
 
-        val countrySpinnerAdapter = ArrayAdapter.createFromResource(this, R.array.country_array, android.R.layout.simple_spinner_dropdown_item)
-        (binding.countryFilterTeamsTextInputLayoutActivityMain.editText as? AutoCompleteTextView)?.setAdapter(countrySpinnerAdapter)
-
+        val countrySpinnerAdapter = ArrayAdapter.createFromResource(
+            this,
+            R.array.country_array,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        (binding.contentFilterTeamsCardActivityMain.countryFilterTeamsTextInputLayoutActivityMain.editText as? AutoCompleteTextView)?.setAdapter(
+            countrySpinnerAdapter
+        )
     }
 
     fun clearMembersFilter() {
 
         // Clear ChipGroup
-        binding.teamCategoryFilterMembersChipGroupActivityMain.clearCheck()
+        binding.contentFilterMembersCardActivityMain.teamCategoryFilterMembersChipGroupActivityMain.clearCheck()
 
         // Clear Gender RadioGroup
-        binding.genderFilterMembersRadioGroupActivityMain.check(R.id.bothFilterMembersRadioButtonActivityMain)
+        binding.contentFilterMembersCardActivityMain.genderFilterMembersRadioGroupActivityMain.check(
+            R.id.bothFilterMembersRadioButtonActivityMain
+        )
 
         // Clear function Spinner
-        binding.functionFilterMembersAutoCompleteTextViewActivityMain.setText(getString(R.string.all), false)
+        binding.contentFilterMembersCardActivityMain.functionFilterMembersAutoCompleteTextViewActivityMain.setText(
+            getString(R.string.all),
+            false
+        )
 
         // Clear country Spinner
-        binding.countryFilterMembersAutoCompleteTextViewActivityMain.setText(getString(R.string.all), false)
-
+        binding.contentFilterMembersCardActivityMain.countryFilterMembersAutoCompleteTextViewActivityMain.setText(
+            getString(R.string.all),
+            false
+        )
     }
 
     fun clearTeamsFilter() {
 
         // Clear ChipGroup
-        binding.teamCategoryFilterTeamsChipGroupActivityMain.clearCheck()
+        binding.contentFilterTeamsCardActivityMain.teamCategoryFilterTeamsChipGroupActivityMain.clearCheck()
 
         // Clear country Spinner
-        binding.countryFilterTeamsAutoCompleteTextViewActivityMain.setText(getString(R.string.all), false)
-
+        binding.contentFilterTeamsCardActivityMain.countryFilterTeamsAutoCompleteTextViewActivityMain.setText(
+            getString(R.string.all),
+            false
+        )
     }
 
     fun disableClickableFab() {
@@ -272,6 +319,5 @@ class MainActivity : AppCompatActivity() {
                 binding.bottomNavigation.selectedItemId = R.id.membersFragment
             }
         }
-
     }
 }

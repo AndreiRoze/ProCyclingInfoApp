@@ -13,8 +13,8 @@ class AboutFragment : Fragment() {
     private var fragmentAboutBinding: FragmentAboutBinding? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         //Binding

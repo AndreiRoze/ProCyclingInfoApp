@@ -13,6 +13,5 @@ class TouchLayout(context: Context, attrs: AttributeSet) : FrameLayout(context, 
     /*override fun onTouchEvent(event: MotionEvent): Boolean {
 
         return true
-
     }*/
 }

@@ -26,8 +26,8 @@ class MembersViewPagerFragment : Fragment() {
     // Init viewModel
     private val viewModel: MembersViewModel by lazy {
         ViewModelProvider(
-                viewModelStore,
-                ViewModelFactory(ApiHelper(RetrofitBuilder.apiService), raceType)
+            viewModelStore,
+            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService), raceType)
         ).get(MembersViewModel::class.java)
     }
     private lateinit var groupType: String
@@ -35,9 +35,9 @@ class MembersViewPagerFragment : Fragment() {
     private lateinit var rvAdapter: MembersRecyclerViewAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         // get data from Bundle
@@ -85,7 +85,6 @@ class MembersViewPagerFragment : Fragment() {
                 chip.text = i.toString()
                 binding.membersChipGroup.addView(chip)
             }
-
         }
 
         // ChipGroup checked change listener
@@ -117,10 +116,14 @@ class MembersViewPagerFragment : Fragment() {
 
             viewModel.setYear(year)
         }
-
     }
 
-    fun setFilterMembers(teamCategories: MutableList<String>, gender: String, function: String, country: String) {
+    fun setFilterMembers(
+        teamCategories: MutableList<String>,
+        gender: String,
+        function: String,
+        country: String
+    ) {
 
         rvAdapter.setFilterMembers(teamCategories, gender, function, country)
         rvAdapter.notifyDataSetChanged()
@@ -140,7 +143,6 @@ class MembersViewPagerFragment : Fragment() {
             goneMembersProgressBar()
             goneNoInternetMembersLinearLayout()
             visibleMembersRecyclerView()
-
         }
     }
 
@@ -248,5 +250,4 @@ class MembersViewPagerFragment : Fragment() {
     private fun visibleNoInternetMembersLinearLayout() {
         fragmentOfMembersViewPagerBinding?.noInternetMembersLinearLayout?.visibility = View.VISIBLE
     }
-
 }

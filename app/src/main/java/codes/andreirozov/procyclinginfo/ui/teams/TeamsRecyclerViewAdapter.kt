@@ -40,7 +40,8 @@ class TeamsRecyclerViewAdapter : RecyclerView.Adapter<TeamsRecyclerViewAdapter.I
         try {
 
             // Set flag
-            val imgStream = holder.binding.flagTeamsImageView.resources.assets.open("flags/" + teams[position].country + ".png")
+            val imgStream =
+                holder.binding.flagTeamsImageView.resources.assets.open("flags/" + teams[position].country + ".png")
             val image = Drawable.createFromStream(imgStream, null)
             holder.binding.flagTeamsImageView.setImageDrawable(image)
 
@@ -62,7 +63,8 @@ class TeamsRecyclerViewAdapter : RecyclerView.Adapter<TeamsRecyclerViewAdapter.I
 
         var filteredTeams = allTeams
 
-        if (teamCategories.isNotEmpty()) filteredTeams = filteredTeams.filter { team -> teamCategories.contains(team.teamCategory) }
+        if (teamCategories.isNotEmpty()) filteredTeams =
+            filteredTeams.filter { team -> teamCategories.contains(team.teamCategory) }
 
         val code = getCodeByName(country)
         if (code != "All") filteredTeams = filteredTeams.filter { team -> team.country == code }
@@ -73,13 +75,11 @@ class TeamsRecyclerViewAdapter : RecyclerView.Adapter<TeamsRecyclerViewAdapter.I
     private fun getCodeByName(country: String): String {
 
         return countryCode.getOrElse(country, { "All" })
-
     }
 
-    fun setTeams(teams: List<Team>?) {
+    private fun setTeams(teams: List<Team>?) {
 
         if (teams != null) this.teams = teams
-
     }
 
     fun setDefaultTeams(teams: List<Team>?) {
@@ -88,6 +88,5 @@ class TeamsRecyclerViewAdapter : RecyclerView.Adapter<TeamsRecyclerViewAdapter.I
             this.teams = teams
             allTeams = teams
         }
-
     }
 }

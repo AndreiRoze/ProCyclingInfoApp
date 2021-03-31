@@ -26,8 +26,8 @@ class TeamsViewPagerFragment : Fragment() {
     // Init viewModel
     private val viewModel: TeamsViewModel by lazy {
         ViewModelProvider(
-                viewModelStore,
-                ViewModelFactory(ApiHelper(RetrofitBuilder.apiService), raceType)
+            viewModelStore,
+            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService), raceType)
         ).get(TeamsViewModel::class.java)
     }
     private lateinit var groupType: String
@@ -35,9 +35,9 @@ class TeamsViewPagerFragment : Fragment() {
     private lateinit var rvAdapter: TeamsRecyclerViewAdapter
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         // get data from Bundle
@@ -98,7 +98,7 @@ class TeamsViewPagerFragment : Fragment() {
             }
 
             // Clear filter
-            (activity as MainActivity).clearMembersFilter()
+            (activity as MainActivity).clearTeamsFilter()
 
             (activity as MainActivity).disableClickableFab()
 

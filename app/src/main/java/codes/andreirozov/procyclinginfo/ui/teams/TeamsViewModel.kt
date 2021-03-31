@@ -34,5 +34,4 @@ class TeamsViewModel(
     fun setYear(year: String) {
         this.year.value = year
     }
-
 }

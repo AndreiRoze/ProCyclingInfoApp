@@ -17,9 +17,9 @@ class MembersFragment : Fragment() {
     private var fragmentMembersBinding: FragmentMembersBinding? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         //Binding
@@ -29,9 +29,14 @@ class MembersFragment : Fragment() {
         setUI(binding)
 
         // Clear filer, when change member's race type
-        binding.viewPagerFragmentMembers.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPagerFragmentMembers.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 (activity as MainActivity).clearMembersFilter()
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
@@ -53,7 +58,12 @@ class MembersFragment : Fragment() {
     private fun setUI(binding: FragmentMembersBinding) {
 
         val viewPagerFragmentAdapter =
-                ViewPagerFragmentAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, 3, "members")
+            ViewPagerFragmentAdapter(
+                childFragmentManager,
+                viewLifecycleOwner.lifecycle,
+                3,
+                "members"
+            )
 
         binding.viewPagerFragmentMembers.apply {
             offscreenPageLimit = 2
@@ -62,8 +72,8 @@ class MembersFragment : Fragment() {
         }
 
         TabLayoutMediator(
-                binding.tabLayoutFragmentMembers,
-                binding.viewPagerFragmentMembers
+            binding.tabLayoutFragmentMembers,
+            binding.viewPagerFragmentMembers
         ) { tab, position ->
             tab.text = when (position) {
                 0 -> "Road"
@@ -75,8 +85,18 @@ class MembersFragment : Fragment() {
     }
 
     // Use filter for RecyclerView from FAB button
-    fun setFilterMembers(teamCategories: MutableList<String>, gender: String, function: String, country: String) {
-        (childFragmentManager.findFragmentByTag("f" + fragmentMembersBinding?.viewPagerFragmentMembers?.currentItem) as MembersViewPagerFragment).setFilterMembers(teamCategories, gender, function, country)
+    fun setFilterMembers(
+        teamCategories: MutableList<String>,
+        gender: String,
+        function: String,
+        country: String
+    ) {
+        (childFragmentManager.findFragmentByTag("f" + fragmentMembersBinding?.viewPagerFragmentMembers?.currentItem) as MembersViewPagerFragment).setFilterMembers(
+            teamCategories,
+            gender,
+            function,
+            country
+        )
     }
 
     override fun onDestroyView() {

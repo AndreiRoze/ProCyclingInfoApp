@@ -17,9 +17,9 @@ class TeamsFragment : Fragment() {
     private var fragmentTeamsBinding: FragmentTeamsBinding? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
 
         // Binding
@@ -29,9 +29,14 @@ class TeamsFragment : Fragment() {
         setUI(binding)
 
         // Clear filer, when change member's race type
-        binding.viewPagerFragmentTeams.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        binding.viewPagerFragmentTeams.registerOnPageChangeCallback(object :
+            ViewPager2.OnPageChangeCallback() {
 
-            override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
                 (activity as MainActivity).clearTeamsFilter()
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
@@ -53,7 +58,7 @@ class TeamsFragment : Fragment() {
     private fun setUI(binding: FragmentTeamsBinding) {
 
         val viewPagerFragmentAdapter =
-                ViewPagerFragmentAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, 3, "teams")
+            ViewPagerFragmentAdapter(childFragmentManager, viewLifecycleOwner.lifecycle, 3, "teams")
 
         binding.viewPagerFragmentTeams.apply {
             offscreenPageLimit = 2
@@ -62,8 +67,8 @@ class TeamsFragment : Fragment() {
         }
 
         TabLayoutMediator(
-                binding.tabLayoutFragmentTeams,
-                binding.viewPagerFragmentTeams
+            binding.tabLayoutFragmentTeams,
+            binding.viewPagerFragmentTeams
         ) { tab, position ->
             tab.text = when (position) {
                 0 -> "Road"
@@ -76,7 +81,10 @@ class TeamsFragment : Fragment() {
 
     // Use filter for RecyclerView from FAB button
     fun setFilterTeams(teamCategories: MutableList<String>, country: String) {
-        (childFragmentManager.findFragmentByTag("f" + fragmentTeamsBinding?.viewPagerFragmentTeams?.currentItem) as TeamsViewPagerFragment).setFilterTeams(teamCategories, country)
+        (childFragmentManager.findFragmentByTag("f" + fragmentTeamsBinding?.viewPagerFragmentTeams?.currentItem) as TeamsViewPagerFragment).setFilterTeams(
+            teamCategories,
+            country
+        )
     }
 
     override fun onDestroyView() {

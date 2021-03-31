@@ -6,8 +6,8 @@ import codes.andreirozov.procyclinginfo.utils.Resource
 import kotlinx.coroutines.Dispatchers
 
 class MembersViewModel(
-        private val memberRepository: MemberRepository,
-        private val raceType: String
+    private val memberRepository: MemberRepository,
+    private val raceType: String
 ) : ViewModel() {
 
     private val year: MutableLiveData<String> = MutableLiveData()
