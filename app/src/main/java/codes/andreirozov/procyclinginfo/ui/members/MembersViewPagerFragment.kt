@@ -17,11 +17,13 @@ import codes.andreirozov.procyclinginfo.databinding.FragmentOfMembersViewPagerBi
 import codes.andreirozov.procyclinginfo.ui.MainActivity
 import codes.andreirozov.procyclinginfo.ui.base.ViewModelFactory
 import codes.andreirozov.procyclinginfo.utils.Resource
+import codes.andreirozov.procyclinginfo.utils.hideView
+import codes.andreirozov.procyclinginfo.utils.showView
 import com.google.android.material.chip.Chip
 
 class MembersViewPagerFragment : Fragment() {
 
-    private var fragmentOfMembersViewPagerBinding: FragmentOfMembersViewPagerBinding? = null
+    private var binding: FragmentOfMembersViewPagerBinding? = null
 
     // Init viewModel
     private val viewModel: MembersViewModel by lazy {
@@ -47,23 +49,22 @@ class MembersViewPagerFragment : Fragment() {
         }
 
         //Binding
-        val binding = FragmentOfMembersViewPagerBinding.inflate(layoutInflater)
-        fragmentOfMembersViewPagerBinding = binding
+        binding = FragmentOfMembersViewPagerBinding.inflate(layoutInflater)
 
-        setUI(binding)
+        setUI()
 
         setObservers()
 
-        return binding.root
+        return binding!!.root
     }
 
-    private fun setUI(binding: FragmentOfMembersViewPagerBinding) {
+    private fun setUI() {
 
         // Create recyclerView adapter
         rvAdapter = MembersRecyclerViewAdapter()
 
         // Set RecyclerView
-        binding.membersRecyclerView.apply {
+        binding!!.membersRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = rvAdapter
         }
@@ -75,7 +76,7 @@ class MembersViewPagerFragment : Fragment() {
             for (i in list) {
                 val chip = Chip(context, null, R.attr.customChipChoiceStyle)
                 chip.text = i
-                binding.membersChipGroup.addView(chip)
+                binding!!.membersChipGroup.addView(chip)
             }
 
         } else {
@@ -83,12 +84,12 @@ class MembersViewPagerFragment : Fragment() {
             for (i in 2005..2020) {
                 val chip = Chip(context, null, R.attr.customChipChoiceStyle)
                 chip.text = i.toString()
-                binding.membersChipGroup.addView(chip)
+                binding!!.membersChipGroup.addView(chip)
             }
         }
 
         // ChipGroup checked change listener
-        binding.membersChipGroup.setOnCheckedChangeListener { chipGroup, chipId ->
+        binding!!.membersChipGroup.setOnCheckedChangeListener { chipGroup, chipId ->
             var year = "2005"
             for (i in chipGroup) {
                 if ((i as Chip).id == chipId) {
@@ -106,13 +107,13 @@ class MembersViewPagerFragment : Fragment() {
         }
 
         // Set first element in ChipGroup as selected
-        (binding.membersChipGroup[0] as Chip).isChecked = true
+        (binding!!.membersChipGroup[0] as Chip).isChecked = true
 
-        binding.retryMembersButton.setOnClickListener {
+        binding!!.retryMembersButton.setOnClickListener {
 
             // Get text from checked Chip
-            val checkedChipId = binding.membersChipGroup.checkedChipId
-            val year = binding.membersChipGroup.findViewById<Chip>(checkedChipId).text.toString()
+            val checkedChipId = binding!!.membersChipGroup.checkedChipId
+            val year = binding!!.membersChipGroup.findViewById<Chip>(checkedChipId).text.toString()
 
             viewModel.setYear(year)
         }
@@ -131,18 +132,18 @@ class MembersViewPagerFragment : Fragment() {
         if (rvAdapter.itemCount == 0) {
 
             // UI visibility
-            goneMembersRecyclerView()
-            goneMembersProgressBar()
-            goneNoInternetMembersLinearLayout()
-            visibleNoAvailableMembersTextView()
+            hideView(binding!!.membersRecyclerView)
+            hideView(binding!!.membersProgressBar)
+            hideView(binding!!.noInternetMembersLinearLayout)
+            showView(binding!!.noAvailableMembersTextView)
 
         } else {
 
             // UI visibility
-            goneNoAvailableMembersTextView()
-            goneMembersProgressBar()
-            goneNoInternetMembersLinearLayout()
-            visibleMembersRecyclerView()
+            hideView(binding!!.noAvailableMembersTextView)
+            hideView(binding!!.membersProgressBar)
+            hideView(binding!!.noInternetMembersLinearLayout)
+            showView(binding!!.membersRecyclerView)
         }
     }
 
@@ -160,24 +161,24 @@ class MembersViewPagerFragment : Fragment() {
                     }
 
                     // UI visibility
-                    goneNoAvailableMembersTextView()
-                    goneMembersProgressBar()
-                    goneNoInternetMembersLinearLayout()
-                    visibleMembersRecyclerView()
+                    hideView(binding!!.noAvailableMembersTextView)
+                    hideView(binding!!.membersProgressBar)
+                    hideView(binding!!.noInternetMembersLinearLayout)
+                    showView(binding!!.membersRecyclerView)
 
                     // Filter FAB clickable, when success only
                     (activity as MainActivity).enableClickableFab()
 
-                    Log.e("Data status", "${it.message!!} $raceType")
+                    Log.i("Data status", "${it.message!!} $raceType")
 
                 }
                 Resource.Status.ERROR -> {
 
                     // UI visibility
-                    goneNoAvailableMembersTextView()
-                    goneMembersProgressBar()
-                    goneMembersRecyclerView()
-                    visibleNoInternetMembersLinearLayout()
+                    hideView(binding!!.noAvailableMembersTextView)
+                    hideView(binding!!.membersProgressBar)
+                    hideView(binding!!.membersRecyclerView)
+                    showView(binding!!.noInternetMembersLinearLayout)
 
                     Log.e("Data status", "${it.message!!} $raceType")
 
@@ -185,15 +186,17 @@ class MembersViewPagerFragment : Fragment() {
                 Resource.Status.LOADING -> {
 
                     // UI visibility
-                    goneNoAvailableMembersTextView()
-                    goneMembersRecyclerView()
-                    goneNoInternetMembersLinearLayout()
-                    visibleMembersProgressBar()
+                    hideView(binding!!.noAvailableMembersTextView)
+                    hideView(binding!!.membersRecyclerView)
+                    hideView(binding!!.noInternetMembersLinearLayout)
+                    showView(binding!!.membersProgressBar)
 
-                    Log.e("Data status", "${it.message!!} $raceType")
+                    Log.i("Data status", "${it.message!!} $raceType")
 
                 }
                 Resource.Status.SERVER_ERROR -> {
+
+                    // TODO handle server error
 
                     Log.e("Data status", "${it.message!!} $raceType")
 
@@ -213,41 +216,7 @@ class MembersViewPagerFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        fragmentOfMembersViewPagerBinding = null
+        binding = null
         super.onDestroyView()
-    }
-
-    //------------------------------ UI VISIBILITY FUNCTIONS BELOW ------------------------------
-
-    private fun goneNoAvailableMembersTextView() {
-        fragmentOfMembersViewPagerBinding?.noAvailableMembersTextView?.visibility = View.GONE
-    }
-
-    private fun visibleNoAvailableMembersTextView() {
-        fragmentOfMembersViewPagerBinding?.noAvailableMembersTextView?.visibility = View.VISIBLE
-    }
-
-    private fun goneMembersRecyclerView() {
-        fragmentOfMembersViewPagerBinding?.membersRecyclerView?.visibility = View.GONE
-    }
-
-    private fun visibleMembersRecyclerView() {
-        fragmentOfMembersViewPagerBinding?.membersRecyclerView?.visibility = View.VISIBLE
-    }
-
-    private fun goneMembersProgressBar() {
-        fragmentOfMembersViewPagerBinding?.membersProgressBar?.visibility = View.GONE
-    }
-
-    private fun visibleMembersProgressBar() {
-        fragmentOfMembersViewPagerBinding?.membersProgressBar?.visibility = View.VISIBLE
-    }
-
-    private fun goneNoInternetMembersLinearLayout() {
-        fragmentOfMembersViewPagerBinding?.noInternetMembersLinearLayout?.visibility = View.GONE
-    }
-
-    private fun visibleNoInternetMembersLinearLayout() {
-        fragmentOfMembersViewPagerBinding?.noInternetMembersLinearLayout?.visibility = View.VISIBLE
     }
 }

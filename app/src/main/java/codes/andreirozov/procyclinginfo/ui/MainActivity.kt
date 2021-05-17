@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             val country =
                 binding.contentFilterMembersCardActivityMain.countryFilterMembersAutoCompleteTextViewActivityMain.text.toString()
 
-            Log.e("Filter data", "$teamCategories $gender $function $country")
+            Log.i("Filter data", "$teamCategories $gender $function $country")
 
             //set filter for members
             (fragmentManager.findFragmentByTag("Members") as MembersFragment).setFilterMembers(
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             val country =
                 binding.contentFilterTeamsCardActivityMain.countryFilterTeamsAutoCompleteTextViewActivityMain.text.toString()
 
-            Log.e("Filter data", "$teamCategories $country")
+            Log.i("Filter data", "$teamCategories $country")
 
             //set filter for teams
             (fragmentManager.findFragmentByTag("Teams") as TeamsFragment).setFilterTeams(

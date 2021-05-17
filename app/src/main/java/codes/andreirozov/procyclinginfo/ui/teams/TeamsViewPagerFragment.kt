@@ -17,11 +17,13 @@ import codes.andreirozov.procyclinginfo.databinding.FragmentOfTeamsViewPagerBind
 import codes.andreirozov.procyclinginfo.ui.MainActivity
 import codes.andreirozov.procyclinginfo.ui.base.ViewModelFactory
 import codes.andreirozov.procyclinginfo.utils.Resource
+import codes.andreirozov.procyclinginfo.utils.hideView
+import codes.andreirozov.procyclinginfo.utils.showView
 import com.google.android.material.chip.Chip
 
 class TeamsViewPagerFragment : Fragment() {
 
-    private var fragmentOfTeamsViewPagerBinding: FragmentOfTeamsViewPagerBinding? = null
+    private var binding: FragmentOfTeamsViewPagerBinding? = null
 
     // Init viewModel
     private val viewModel: TeamsViewModel by lazy {
@@ -47,23 +49,22 @@ class TeamsViewPagerFragment : Fragment() {
         }
 
         //Binding
-        val binding = FragmentOfTeamsViewPagerBinding.inflate(layoutInflater)
-        fragmentOfTeamsViewPagerBinding = binding
+        binding = FragmentOfTeamsViewPagerBinding.inflate(layoutInflater)
 
-        setUI(binding)
+        setUI()
 
         setObservers()
 
-        return binding.root
+        return binding!!.root
     }
 
-    private fun setUI(binding: FragmentOfTeamsViewPagerBinding) {
+    private fun setUI() {
 
         // Create recyclerView adapter
         rvAdapter = TeamsRecyclerViewAdapter()
 
         // Set RecyclerView
-        binding.teamsRecyclerView.apply {
+        binding!!.teamsRecyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = rvAdapter
         }
@@ -75,7 +76,7 @@ class TeamsViewPagerFragment : Fragment() {
             for (i in list) {
                 val chip = Chip(context, null, R.attr.customChipChoiceStyle)
                 chip.text = i
-                binding.teamsChipGroup.addView(chip)
+                binding!!.teamsChipGroup.addView(chip)
             }
 
         } else {
@@ -83,12 +84,12 @@ class TeamsViewPagerFragment : Fragment() {
             for (i in 2005..2020) {
                 val chip = Chip(context, null, R.attr.customChipChoiceStyle)
                 chip.text = i.toString()
-                binding.teamsChipGroup.addView(chip)
+                binding!!.teamsChipGroup.addView(chip)
             }
 
         }
 
-        binding.teamsChipGroup.setOnCheckedChangeListener { chipGroup, chipId ->
+        binding!!.teamsChipGroup.setOnCheckedChangeListener { chipGroup, chipId ->
             var year = "2005"
             for (i in chipGroup) {
                 if ((i as Chip).id == chipId) {
@@ -106,13 +107,13 @@ class TeamsViewPagerFragment : Fragment() {
         }
 
         // Set first element in ChipGroup as selected
-        (binding.teamsChipGroup[0] as Chip).isChecked = true
+        (binding!!.teamsChipGroup[0] as Chip).isChecked = true
 
-        binding.retryTeamsButton.setOnClickListener {
+        binding!!.retryTeamsButton.setOnClickListener {
 
             // Get text from checked Chip
-            val checkedChipId = binding.teamsChipGroup.checkedChipId
-            val year = binding.teamsChipGroup.findViewById<Chip>(checkedChipId).text.toString()
+            val checkedChipId = binding!!.teamsChipGroup.checkedChipId
+            val year = binding!!.teamsChipGroup.findViewById<Chip>(checkedChipId).text.toString()
 
             viewModel.setYear(year)
         }
@@ -127,19 +128,18 @@ class TeamsViewPagerFragment : Fragment() {
         if (rvAdapter.itemCount == 0) {
 
             // UI visibility
-            goneTeamsRecyclerView()
-            goneTeamsProgressBar()
-            goneNoInternetTeamsLinearLayout()
-            visibleNoAvailableTeamsTextView()
+            hideView(binding!!.teamsRecyclerView)
+            hideView(binding!!.teamsProgressBar)
+            hideView(binding!!.noInternetTeamsLinearLayout)
+            showView(binding!!.noAvailableTeamsTextView)
 
         } else {
 
             // UI visibility
-            goneNoAvailableTeamsTextView()
-            goneTeamsProgressBar()
-            goneNoInternetTeamsLinearLayout()
-            visibleTeamsRecyclerView()
-
+            hideView(binding!!.noAvailableTeamsTextView)
+            hideView(binding!!.teamsProgressBar)
+            hideView(binding!!.noInternetTeamsLinearLayout)
+            showView(binding!!.teamsRecyclerView)
         }
     }
 
@@ -157,24 +157,24 @@ class TeamsViewPagerFragment : Fragment() {
                     }
 
                     // UI visibility
-                    goneNoAvailableTeamsTextView()
-                    goneTeamsProgressBar()
-                    goneNoInternetTeamsLinearLayout()
-                    visibleTeamsRecyclerView()
+                    hideView(binding!!.noAvailableTeamsTextView)
+                    hideView(binding!!.teamsProgressBar)
+                    hideView(binding!!.noInternetTeamsLinearLayout)
+                    showView(binding!!.teamsRecyclerView)
 
                     // Filter FAB clickable, when success only
                     (activity as MainActivity).enableClickableFab()
 
-                    Log.e("Data status", "${it.message!!} $raceType")
+                    Log.i("Data status", "${it.message!!} $raceType")
 
                 }
                 Resource.Status.ERROR -> {
 
                     // UI visibility
-                    goneNoAvailableTeamsTextView()
-                    goneTeamsProgressBar()
-                    goneTeamsRecyclerView()
-                    visibleNoInternetTeamsLinearLayout()
+                    hideView(binding!!.noAvailableTeamsTextView)
+                    hideView(binding!!.teamsProgressBar)
+                    hideView(binding!!.teamsRecyclerView)
+                    showView(binding!!.noInternetTeamsLinearLayout)
 
                     Log.e("Data status", "${it.message!!} $raceType")
 
@@ -182,15 +182,17 @@ class TeamsViewPagerFragment : Fragment() {
                 Resource.Status.LOADING -> {
 
                     // UI visibility
-                    goneNoAvailableTeamsTextView()
-                    goneTeamsRecyclerView()
-                    goneNoInternetTeamsLinearLayout()
-                    visibleTeamsProgressBar()
+                    hideView(binding!!.noAvailableTeamsTextView)
+                    hideView(binding!!.teamsRecyclerView)
+                    hideView(binding!!.noInternetTeamsLinearLayout)
+                    showView(binding!!.teamsProgressBar)
 
-                    Log.e("Data status", "${it.message!!} $raceType")
+                    Log.i("Data status", "${it.message!!} $raceType")
 
                 }
                 Resource.Status.SERVER_ERROR -> {
+
+                    // TODO handle server error
 
                     Log.e("Data status", "${it.message!!} $raceType")
 
@@ -210,42 +212,7 @@ class TeamsViewPagerFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        fragmentOfTeamsViewPagerBinding = null
+        binding = null
         super.onDestroyView()
     }
-
-    //------------------------------ UI VISIBILITY FUNCTIONS BELOW ------------------------------
-
-    private fun goneNoAvailableTeamsTextView() {
-        fragmentOfTeamsViewPagerBinding?.noAvailableTeamsTextView?.visibility = View.GONE
-    }
-
-    private fun visibleNoAvailableTeamsTextView() {
-        fragmentOfTeamsViewPagerBinding?.noAvailableTeamsTextView?.visibility = View.VISIBLE
-    }
-
-    private fun goneTeamsRecyclerView() {
-        fragmentOfTeamsViewPagerBinding?.teamsRecyclerView?.visibility = View.GONE
-    }
-
-    private fun visibleTeamsRecyclerView() {
-        fragmentOfTeamsViewPagerBinding?.teamsRecyclerView?.visibility = View.VISIBLE
-    }
-
-    private fun goneTeamsProgressBar() {
-        fragmentOfTeamsViewPagerBinding?.teamsProgressBar?.visibility = View.GONE
-    }
-
-    private fun visibleTeamsProgressBar() {
-        fragmentOfTeamsViewPagerBinding?.teamsProgressBar?.visibility = View.VISIBLE
-    }
-
-    private fun goneNoInternetTeamsLinearLayout() {
-        fragmentOfTeamsViewPagerBinding?.noInternetTeamsLinearLayout?.visibility = View.GONE
-    }
-
-    private fun visibleNoInternetTeamsLinearLayout() {
-        fragmentOfTeamsViewPagerBinding?.noInternetTeamsLinearLayout?.visibility = View.VISIBLE
-    }
-
 }
